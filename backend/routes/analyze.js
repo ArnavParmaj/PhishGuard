@@ -4,7 +4,9 @@ const aiService = require('../services/aiService');
 const transcriptionService = require('../services/transcriptionService');
 
 const router = express.Router();
-const upload = multer({ dest: 'uploads/' });
+
+// Use memoryStorage so req.file.buffer is available for Gemini inline audio
+const upload = multer({ storage: multer.memoryStorage() });
 
 // POST /api/analyze/text - accepts { text: string }
 router.post('/text', async (req, res) => {
@@ -22,11 +24,11 @@ router.post('/text', async (req, res) => {
     res.json(analysis);
   } catch (error) {
     console.error('Error analyzing text:', error);
-    res.status(500).json({ error: 'Internal server error' });
+    res.status(500).json({ error: error.message || 'Internal server error' });
   }
 });
 
-// POST /api/analyze/audio - accepts multipart/form-data using multer
+// POST /api/analyze/audio - accepts multipart/form-data with field name "audio"
 router.post('/audio', upload.single('audio'), async (req, res) => {
   try {
     // Check if file was uploaded
@@ -34,19 +36,18 @@ router.post('/audio', upload.single('audio'), async (req, res) => {
       return res.status(400).json({ error: 'Audio file is required' });
     }
 
-    // Call transcription service to transcribe audio
-    const transcript = await transcriptionService.transcribeAudio(req.file);
+    const { buffer, mimetype } = req.file;
 
-    // Call AI service to analyze transcript
+    // Step 1: Transcribe audio buffer via Gemini
+    const transcript = await transcriptionService.transcribeAudio(buffer, mimetype);
+
+    // Step 2: Analyze transcript for phishing via Gemini
     const analysis = await aiService.analyzeText(transcript);
 
-    res.json({
-      transcript,
-      analysis
-    });
+    res.json({ transcript, analysis });
   } catch (error) {
     console.error('Error analyzing audio:', error);
-    res.status(500).json({ error: 'Internal server error' });
+    res.status(500).json({ error: error.message || 'Internal server error' });
   }
 });
 

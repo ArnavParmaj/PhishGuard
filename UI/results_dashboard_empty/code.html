@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PhishGuard AI - Security Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0d7ff2",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#0A0F1E",
+                        "slate-panel": "#141C2F",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "mono": ["IBM Plex Mono", "monospace"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .grid-bg {
+            background-image: radial-gradient(circle at 1px 1px, rgba(13, 127, 242, 0.05) 1px, transparent 0);
+            background-size: 24px 24px;
+        }
+        .skeuo-inner {
+            box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.4);
+        }
+        .skeuo-outer {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.05);
+        }
+    </style>
+</head>
+<body class="bg-background-dark font-display text-slate-100 grid-bg min-h-screen">
+<div class="relative flex flex-col min-h-screen">
+<!-- Navigation Header -->
+<header class="border-b border-white/10 bg-background-dark/80 backdrop-blur-md sticky top-0 z-50">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="bg-primary p-1.5 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-[20px]">shield_with_heart</span>
+</div>
+<h2 class="text-slate-100 text-lg font-bold tracking-tight font-mono">PHISHGUARD AI</h2>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden md:flex items-center gap-1 bg-white/5 border border-white/10 px-3 py-1.5 rounded-lg font-mono text-[11px] text-primary/80">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                        SYSTEM: ONLINE
+                    </div>
+<button class="p-2 text-slate-400 hover:text-white transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="h-8 w-8 rounded-full bg-primary/20 border border-primary/40 flex items-center justify-center overflow-hidden">
+<span class="material-symbols-outlined text-primary text-lg">account_circle</span>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 flex flex-col gap-6">
+<!-- Analysis Input Section (Collapsed Style) -->
+<section class="w-full">
+<div class="bg-slate-panel skeuo-outer rounded-xl p-1.5 border border-white/5">
+<div class="flex flex-col md:flex-row items-center gap-2">
+<div class="relative flex-1 w-full">
+<div class="absolute inset-y-0 left-4 flex items-center pointer-events-none">
+<span class="material-symbols-outlined text-slate-500 text-xl">link</span>
+</div>
+<input class="w-full bg-background-dark/50 border border-white/5 rounded-lg py-3 pl-12 pr-4 text-sm font-mono placeholder-slate-600 focus:ring-1 focus:ring-primary focus:border-primary transition-all skeuo-inner" placeholder="ENTER URL OR PASTE EMAIL HEADER FOR NEURAL SCAN..." type="text"/>
+</div>
+<button class="w-full md:w-auto px-8 py-3 bg-primary hover:bg-primary/90 text-white text-sm font-bold rounded-lg transition-all flex items-center justify-center gap-2 shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-sm">bolt</span>
+                            ANALYZE
+                        </button>
+</div>
+</div>
+<div class="mt-3 flex gap-4 px-2">
+<div class="flex items-center gap-1.5 text-[10px] text-slate-500 font-mono uppercase tracking-widest">
+<span class="material-symbols-outlined text-[14px]">history</span>
+                        Recent: google-verify.cc
+                    </div>
+<div class="flex items-center gap-1.5 text-[10px] text-slate-500 font-mono uppercase tracking-widest">
+<span class="material-symbols-outlined text-[14px]">history</span>
+                        bank-secure-login.net
+                    </div>
+</div>
+</section>
+<!-- Results Panel (Empty State) -->
+<section class="flex-1 flex flex-col min-h-[500px]">
+<div class="flex-1 bg-[#0F172A] rounded-xl border border-white/5 flex flex-col skeuo-outer overflow-hidden relative">
+<!-- Panel Header/Chrome -->
+<div class="h-10 border-b border-white/5 bg-slate-panel/50 flex items-center justify-between px-4">
+<div class="flex items-center gap-2">
+<div class="flex gap-1.5">
+<div class="w-2.5 h-2.5 rounded-full bg-slate-700"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-slate-700"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-slate-700"></div>
+</div>
+<span class="ml-3 text-[10px] font-mono text-slate-500 uppercase tracking-widest">Analysis_Module_v4.0.2</span>
+</div>
+<div class="flex gap-4">
+<span class="material-symbols-outlined text-slate-600 text-sm">settings</span>
+<span class="material-symbols-outlined text-slate-600 text-sm">fullscreen</span>
+</div>
+</div>
+<!-- Empty State Content -->
+<div class="flex-1 flex flex-col items-center justify-center p-8 relative">
+<!-- Abstract Visual Center -->
+<div class="relative mb-8">
+<!-- Outer Ring -->
+<div class="absolute inset-0 rounded-full border border-primary/10 animate-pulse scale-150"></div>
+<!-- Central Shield Icon -->
+<div class="size-24 rounded-full bg-primary/5 border border-primary/20 flex items-center justify-center relative skeuo-outer">
+<span class="material-symbols-outlined text-primary/30 text-5xl font-extralight">verified_user</span>
+</div>
+</div>
+<div class="text-center max-w-sm">
+<h3 class="text-slate-100 font-bold text-xl mb-2">Ready for Scan</h3>
+<p class="text-slate-500 text-sm leading-relaxed mb-8">
+                                Input a suspect URL or security identifier above to begin the deep-learning analysis process. 
+                            </p>
+<div class="flex flex-col gap-3">
+<div class="flex items-center gap-4 px-4 py-3 rounded-lg bg-background-dark/30 border border-white/5 text-left transition-all hover:border-primary/30">
+<div class="size-8 rounded bg-slate-800 flex items-center justify-center">
+<span class="material-symbols-outlined text-slate-400 text-lg">description</span>
+</div>
+<div>
+<p class="text-[11px] font-mono text-slate-300">HEADER ANALYSIS</p>
+<p class="text-[10px] text-slate-600">Scan SMTP and MIME structures</p>
+</div>
+</div>
+<div class="flex items-center gap-4 px-4 py-3 rounded-lg bg-background-dark/30 border border-white/5 text-left transition-all hover:border-primary/30">
+<div class="size-8 rounded bg-slate-800 flex items-center justify-center">
+<span class="material-symbols-outlined text-slate-400 text-lg">language</span>
+</div>
+<div>
+<p class="text-[11px] font-mono text-slate-300">URL REPUTATION</p>
+<p class="text-[10px] text-slate-600">Real-time domain threat intelligence</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Technical Footnote -->
+<div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-3">
+<div class="px-3 py-1 rounded bg-slate-panel/50 border border-white/5 font-mono text-[9px] text-slate-600">
+                                STATUS: IDLE_WAITING_INPUT
+                            </div>
+<div class="px-3 py-1 rounded bg-slate-panel/50 border border-white/5 font-mono text-[9px] text-slate-600">
+                                GPU_ACCEL: ENABLED
+                            </div>
+</div>
+</div>
+</div>
+<!-- Secondary Info Bar -->
+<div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="p-4 rounded-xl border border-white/5 bg-slate-panel/20 flex items-start gap-4">
+<span class="material-symbols-outlined text-primary/60">monitoring</span>
+<div>
+<h4 class="text-xs font-bold text-slate-200 uppercase tracking-wider mb-1">Global Threats</h4>
+<p class="text-[11px] text-slate-500">1.2M active phishing campaigns detected in the last 24h.</p>
+</div>
+</div>
+<div class="p-4 rounded-xl border border-white/5 bg-slate-panel/20 flex items-start gap-4">
+<span class="material-symbols-outlined text-primary/60">hub</span>
+<div>
+<h4 class="text-xs font-bold text-slate-200 uppercase tracking-wider mb-1">Network Mesh</h4>
+<p class="text-[11px] text-slate-500">Connected to 14 global threat intelligence databases.</p>
+</div>
+</div>
+<div class="p-4 rounded-xl border border-white/5 bg-slate-panel/20 flex items-start gap-4">
+<span class="material-symbols-outlined text-primary/60">history_edu</span>
+<div>
+<h4 class="text-xs font-bold text-slate-200 uppercase tracking-wider mb-1">Last Activity</h4>
+<p class="text-[11px] text-slate-500">System baseline calibrated 4 minutes ago.</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="mt-auto py-6 border-t border-white/5">
+<div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="text-[11px] font-mono text-slate-600 tracking-tighter">
+                    © 2024 PHISHGUARD AI SECURITY SYSTEMS. ALL RIGHTS RESERVED.
+                </p>
+<div class="flex gap-6">
+<a class="text-[11px] font-mono text-slate-600 hover:text-primary transition-colors uppercase tracking-widest" href="#">Documentation</a>
+<a class="text-[11px] font-mono text-slate-600 hover:text-primary transition-colors uppercase tracking-widest" href="#">API Console</a>
+<a class="text-[11px] font-mono text-slate-600 hover:text-primary transition-colors uppercase tracking-widest" href="#">Privacy Policy</a>
+</div>
+</div>
+</footer>
+</div>
+</body></html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0d7ff2",
+                        "error-red": "#FF3B3B",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#0A0F1E",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "mono": ["IBM Plex Mono", "monospace"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .error-glow {
+            box-shadow: 0 0 20px rgba(255, 59, 59, 0.15), inset 0 0 12px rgba(255, 59, 59, 0.1);
+            border: 1px solid rgba(255, 59, 59, 0.4);
+        }
+        .skeuo-button {
+            background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+            box-shadow: 0 4px 0 0 #020617, 0 8px 15px rgba(0,0,0,0.5);
+            transition: all 0.1s ease;
+        }
+        .skeuo-button:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 0 #020617, 0 4px 8px rgba(0,0,0,0.5);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
+<!-- Top Navigation -->
+<header class="flex items-center justify-between border-b border-slate-800 px-6 py-4 bg-background-dark/50 backdrop-blur-md sticky top-0 z-50">
+<div class="flex items-center gap-3">
+<div class="bg-primary/20 p-2 rounded-lg">
+<span class="material-symbols-outlined text-primary text-2xl" data-icon="shield_with_heart">shield_lock</span>
+</div>
+<h1 class="text-xl font-bold tracking-tight font-mono text-slate-100">PhishGuard AI</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full hover:bg-slate-800 text-slate-400 transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<div class="h-8 w-8 rounded-full bg-primary/30 border border-primary/50 flex items-center justify-center">
+<span class="material-symbols-outlined text-sm">person</span>
+</div>
+</div>
+</header>
+<main class="flex-1 flex items-center justify-center p-6">
+<div class="max-w-md w-full">
+<!-- Error Panel -->
+<div class="error-glow bg-slate-900/40 rounded-xl p-8 flex flex-col items-center text-center backdrop-blur-sm">
+<div class="mb-6 relative">
+<div class="absolute inset-0 bg-error-red/20 blur-xl rounded-full"></div>
+<div class="relative bg-background-dark border border-error-red/30 p-4 rounded-full">
+<span class="material-symbols-outlined text-error-red text-5xl leading-none" data-icon="warning">warning</span>
+</div>
+</div>
+<h2 class="text-2xl font-bold text-slate-100 mb-2">Something went wrong</h2>
+<p class="text-slate-400 font-mono text-sm mb-8">
+                    An unexpected connection error occurred. Please try again.
+                </p>
+<div class="w-full space-y-4">
+<button class="skeuo-button w-full py-4 rounded-lg font-bold text-slate-100 border border-slate-700/50 flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-lg" data-icon="refresh">refresh</span>
+                        Retry Connection
+                    </button>
+<button class="w-full py-2 text-sm font-medium text-slate-500 hover:text-slate-300 transition-colors">
+                        Go back to Dashboard
+                    </button>
+</div>
+</div>
+<!-- Subtle Grid Background Decoration -->
+<div class="fixed inset-0 -z-10 pointer-events-none opacity-20" data-alt="Subtle dark grid pattern background" style="background-image: radial-gradient(#1e293b 1px, transparent 1px); background-size: 24px 24px;">
+</div>
+</div>
+</main>
+<!-- Sidebar / Nav items simplified for center focus -->
+<nav class="fixed bottom-8 left-1/2 -translate-x-1/2 bg-slate-900/80 border border-slate-800 px-6 py-3 rounded-full flex items-center gap-8 backdrop-blur-md shadow-2xl">
+<a class="text-slate-500 hover:text-primary transition-colors flex flex-col items-center" href="#">
+<span class="material-symbols-outlined" data-icon="grid_view">grid_view</span>
+</a>
+<a class="text-slate-500 hover:text-primary transition-colors flex flex-col items-center" href="#">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+</a>
+<a class="text-slate-500 hover:text-primary transition-colors flex flex-col items-center" href="#">
+<span class="material-symbols-outlined" data-icon="security">security</span>
+</a>
+<a class="text-slate-500 hover:text-primary transition-colors flex flex-col items-center" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</a>
+</nav>
+<footer class="p-6 text-center">
+<p class="text-slate-600 text-xs font-mono">SYSTEM STATUS: <span class="text-error-red">DISCONNECTED</span></p>
+</footer>
+</body></html>

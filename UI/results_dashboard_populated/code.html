@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>PhishGuard AI - Results Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0d7ff2",
+                        "background-light": "#f5f7f8",
+                        "background-dark": "#0a0f14",
+                        "danger": "#ef4444",
+                        "warning": "#f59e0b",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"],
+                        "mono": ["IBM Plex Mono", "monospace"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .skeuo-card {
+            background: linear-gradient(145deg, #16202a, #0e141b);
+            border: 1px solid #223649;
+            box-shadow: inset 0 1px 1px rgba(255,255,255,0.05), 0 10px 15px -3px rgba(0,0,0,0.4);
+        }
+        .glow-banner {
+            background: linear-gradient(90deg, rgba(239, 68, 68, 0.1) 0%, rgba(239, 68, 68, 0.02) 100%);
+            border-left: 4px solid #ef4444;
+        }
+        .indicator-row {
+            border-bottom: 1px solid rgba(34, 54, 73, 0.5);
+        }
+        .indicator-row:last-child {
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<!-- Navigation -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-[#223649] px-6 lg:px-20 py-4 bg-background-light dark:bg-background-dark/80 backdrop-blur-md sticky top-0 z-50">
+<div class="flex items-center gap-3">
+<div class="size-8 bg-primary rounded flex items-center justify-center text-white shadow-[0_0_15px_rgba(13,127,242,0.4)]">
+<span class="material-symbols-outlined text-xl">shield_person</span>
+</div>
+<h2 class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-tight font-mono uppercase">PHISHGUARD_AI <span class="text-primary/60 font-normal">v2.4</span></h2>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center justify-center rounded-lg h-10 w-10 bg-slate-100 dark:bg-[#182634] border border-slate-200 dark:border-[#223649] text-slate-600 dark:text-slate-400">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<button class="flex items-center justify-center rounded-lg h-10 w-10 bg-slate-100 dark:bg-[#182634] border border-slate-200 dark:border-[#223649] text-slate-600 dark:text-slate-400">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="h-10 w-10 rounded-full bg-primary/20 border border-primary/40 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">account_circle</span>
+</div>
+</div>
+</header>
+<main class="px-6 lg:px-20 py-8 max-w-[1440px] mx-auto w-full">
+<!-- 1. Risk Banner -->
+<div class="mb-8 p-6 rounded-xl glow-banner shadow-[0_0_30px_rgba(239,68,68,0.1)] flex flex-col md:flex-row md:items-center justify-between gap-6 bg-white dark:bg-[#161b22]">
+<div class="flex flex-col gap-2">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-danger animate-pulse">report</span>
+<div class="h-5 w-32 bg-slate-200 dark:bg-slate-700 rounded-sm"></div>
+</div>
+<div class="h-4 w-64 bg-slate-100 dark:bg-slate-800 rounded-sm"></div>
+</div>
+<div class="flex items-center gap-4">
+<div class="h-10 w-32 bg-danger/20 border border-danger/30 rounded flex items-center justify-center">
+<div class="h-2 w-16 bg-danger/40 rounded"></div>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Left Column -->
+<div class="lg:col-span-8 flex flex-col gap-8">
+<!-- 2. Tactic Card -->
+<div class="skeuo-card rounded-xl p-1 overflow-hidden">
+<div class="bg-[#101922] p-6 rounded-lg border border-[#223649] flex flex-col md:flex-row gap-6">
+<div class="w-full md:w-1/3 aspect-[4/5] bg-[#0a0f14] rounded-lg border border-[#223649] flex flex-col items-center justify-center relative overflow-hidden group">
+<div class="absolute top-0 left-0 w-full h-1 bg-primary/30"></div>
+<span class="material-symbols-outlined text-6xl text-slate-800 dark:text-[#1a2b3c]">fingerprint</span>
+<div class="absolute bottom-4 left-4 right-4 h-2 bg-slate-800 dark:bg-[#1a2b3c] rounded-full overflow-hidden">
+<div class="h-full bg-primary w-2/3 shadow-[0_0_10px_#0d7ff2]"></div>
+</div>
+<div class="absolute top-4 right-4 px-2 py-1 rounded bg-primary/10 border border-primary/30 text-[10px] font-mono text-primary">ID_7749-X</div>
+</div>
+<div class="flex-1 flex flex-col justify-between py-2">
+<div class="flex flex-col gap-4">
+<div class="h-8 w-2/3 bg-slate-800 dark:bg-[#1a2b3c] rounded"></div>
+<div class="space-y-2">
+<div class="h-4 w-full bg-slate-800 dark:bg-[#1a2b3c]/50 rounded"></div>
+<div class="h-4 w-full bg-slate-800 dark:bg-[#1a2b3c]/50 rounded"></div>
+<div class="h-4 w-3/4 bg-slate-800 dark:bg-[#1a2b3c]/50 rounded"></div>
+</div>
+</div>
+<div class="flex gap-3 mt-6">
+<div class="px-3 py-1 bg-warning/10 border border-warning/30 rounded-full text-warning text-xs font-mono">MITRE_T1566</div>
+<div class="px-3 py-1 bg-primary/10 border border-primary/30 rounded-full text-primary text-xs font-mono">SOC_ALERT</div>
+</div>
+</div>
+</div>
+</div>
+<!-- 3. Highlighted Message Panel -->
+<div class="skeuo-card rounded-xl flex flex-col">
+<div class="border-b border-[#223649] px-6 py-4 flex items-center justify-between">
+<h3 class="font-mono text-sm font-bold text-slate-400 uppercase tracking-widest">Message_Analysis_Buffer</h3>
+<div class="flex gap-2">
+<div class="size-2 rounded-full bg-primary"></div>
+<div class="size-2 rounded-full bg-slate-700"></div>
+<div class="size-2 rounded-full bg-slate-700"></div>
+</div>
+</div>
+<div class="p-6 h-80 overflow-y-auto font-mono text-sm leading-relaxed bg-[#0a0f14]/50 custom-scrollbar">
+<div class="space-y-4">
+<div class="flex gap-4">
+<span class="text-slate-600 select-none">001</span>
+<p class="text-slate-400">Received: from mx.internal.gateway (10.0.42.1) by mail.corp.local</p>
+</div>
+<div class="flex gap-4">
+<span class="text-slate-600 select-none">002</span>
+<p class="text-slate-400">Subject: Urgent: <span class="bg-warning/20 text-warning px-1 border border-warning/30 rounded">REDACTED_ENTITY_REF_44</span> Verification Required</p>
+</div>
+<div class="flex gap-4">
+<span class="text-slate-600 select-none">003</span>
+<p class="text-slate-400">---</p>
+</div>
+<div class="flex gap-4">
+<span class="text-slate-600 select-none">004</span>
+<p class="text-slate-400">Dear user, your access to <span class="bg-warning/20 text-warning px-1 border border-warning/30 rounded">SYSTEM_PORTAL_ALPHA</span> is scheduled for termination.</p>
+</div>
+<div class="flex gap-4">
+<span class="text-slate-600 select-none">005</span>
+<p class="text-slate-400">Please click the link below to verify your credentials immediately:</p>
+</div>
+<div class="flex gap-4">
+<span class="text-slate-600 select-none">006</span>
+<p class="text-primary underline cursor-pointer">https://security-verify-portal.net/auth/confirm?id=99283</p>
+</div>
+<div class="flex gap-4">
+<span class="text-slate-600 select-none">007</span>
+<p class="text-slate-400">Failure to comply will result in permanent <span class="bg-warning/20 text-warning px-1 border border-warning/30 rounded">ACCOUNT_LOCKOUT</span>.</p>
+</div>
+<div class="flex gap-4">
+<span class="text-slate-600 select-none">008</span>
+<p class="text-slate-400">Best regards,</p>
+</div>
+<div class="flex gap-4">
+<span class="text-slate-600 select-none">009</span>
+<p class="text-slate-400">The <span class="bg-warning/20 text-warning px-1 border border-warning/30 rounded">IT_SECURITY_DEPT</span></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column -->
+<div class="lg:col-span-4 flex flex-col gap-8">
+<!-- 5. Confidence Meter -->
+<div class="skeuo-card rounded-xl p-6 bg-[#16202a]">
+<div class="flex justify-between items-end mb-4">
+<h4 class="font-mono text-xs text-slate-400 uppercase tracking-widest">Confidence Score</h4>
+<span class="text-3xl font-bold text-primary font-mono tracking-tighter">0%</span>
+</div>
+<div class="h-6 bg-[#0a0f14] rounded-full border border-[#223649] p-1 relative overflow-hidden">
+<div class="h-full w-0 bg-primary rounded-full shadow-[0_0_15px_#0d7ff2] relative">
+<div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+</div>
+</div>
+<div class="mt-4 flex justify-between font-mono text-[10px] text-slate-600 uppercase">
+<span>Zero_Confidence</span>
+<span>Theoretical_Max</span>
+</div>
+</div>
+<!-- 6. Language Badge & Metadata -->
+<div class="skeuo-card rounded-xl p-4 flex items-center justify-between bg-[#16202a]">
+<span class="text-xs text-slate-500 font-mono">DETECTED_LANG</span>
+<div class="px-3 py-1 rounded-full bg-slate-800 dark:bg-[#1a2b3c] border border-[#223649] flex items-center gap-2">
+<span class="size-2 rounded-full bg-slate-600"></span>
+<span class="text-xs font-mono text-slate-400">NULL_STATE</span>
+</div>
+</div>
+<!-- 4. Suspicious Indicators List -->
+<div class="skeuo-card rounded-xl overflow-hidden flex flex-col">
+<div class="px-6 py-4 border-b border-[#223649] bg-[#1a2633]">
+<h4 class="font-mono text-xs font-bold text-slate-300 uppercase">Indicators_Log</h4>
+</div>
+<div class="p-2 flex flex-col">
+<div class="indicator-row p-4 flex gap-4 items-start hover:bg-white/5 transition-colors cursor-default">
+<div class="size-8 rounded bg-danger/10 border border-danger/30 flex items-center justify-center text-danger shrink-0">
+<span class="material-symbols-outlined text-xl">warning</span>
+</div>
+<div class="flex flex-col gap-1 flex-1">
+<div class="h-3 w-24 bg-slate-700 rounded"></div>
+<div class="h-2 w-full bg-slate-800 rounded"></div>
+</div>
+</div>
+<div class="indicator-row p-4 flex gap-4 items-start hover:bg-white/5 transition-colors cursor-default">
+<div class="size-8 rounded bg-warning/10 border border-warning/30 flex items-center justify-center text-warning shrink-0">
+<span class="material-symbols-outlined text-xl">link_off</span>
+</div>
+<div class="flex flex-col gap-1 flex-1">
+<div class="h-3 w-32 bg-slate-700 rounded"></div>
+<div class="h-2 w-full bg-slate-800 rounded"></div>
+</div>
+</div>
+<div class="indicator-row p-4 flex gap-4 items-start hover:bg-white/5 transition-colors cursor-default">
+<div class="size-8 rounded bg-primary/10 border border-primary/30 flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined text-xl">language</span>
+</div>
+<div class="flex flex-col gap-1 flex-1">
+<div class="h-3 w-20 bg-slate-700 rounded"></div>
+<div class="h-2 w-full bg-slate-800 rounded"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- 7. Tactics Breakdown Chart -->
+<div class="skeuo-card rounded-xl p-6 bg-[#16202a]">
+<h4 class="font-mono text-xs text-slate-400 uppercase tracking-widest mb-6">Tactics_Distribution</h4>
+<div class="h-40 flex items-end gap-4 px-2 border-l border-b border-[#223649] relative">
+<!-- Zero bars -->
+<div class="flex-1 bg-slate-800/20 h-0.5 rounded-t group relative">
+<div class="absolute -bottom-6 left-1/2 -translate-x-1/2 text-[10px] font-mono text-slate-600">T1</div>
+</div>
+<div class="flex-1 bg-slate-800/20 h-0.5 rounded-t group relative">
+<div class="absolute -bottom-6 left-1/2 -translate-x-1/2 text-[10px] font-mono text-slate-600">T2</div>
+</div>
+<div class="flex-1 bg-slate-800/20 h-0.5 rounded-t group relative">
+<div class="absolute -bottom-6 left-1/2 -translate-x-1/2 text-[10px] font-mono text-slate-600">T3</div>
+</div>
+<div class="flex-1 bg-slate-800/20 h-0.5 rounded-t group relative">
+<div class="absolute -bottom-6 left-1/2 -translate-x-1/2 text-[10px] font-mono text-slate-600">T4</div>
+</div>
+<div class="flex-1 bg-slate-800/20 h-0.5 rounded-t group relative">
+<div class="absolute -bottom-6 left-1/2 -translate-x-1/2 text-[10px] font-mono text-slate-600">T5</div>
+</div>
+<!-- Y Axis Labels -->
+<div class="absolute -left-6 top-0 text-[10px] font-mono text-slate-700 italic">100</div>
+<div class="absolute -left-6 top-1/2 text-[10px] font-mono text-slate-700 italic">50</div>
+<div class="absolute -left-6 bottom-0 text-[10px] font-mono text-slate-700 italic">0</div>
+</div>
+<div class="mt-10 h-10 flex items-center justify-center">
+<div class="px-3 py-1 bg-[#0a0f14] border border-[#223649] rounded text-[10px] font-mono text-slate-500 uppercase tracking-tighter italic">
+                                    Waiting for telemetry...
+                                </div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer Meta -->
+<footer class="mt-auto px-6 lg:px-20 py-6 border-t border-slate-200 dark:border-[#223649] flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] font-mono text-slate-500 uppercase">
+<div class="flex items-center gap-6">
+<span class="flex items-center gap-1"><span class="size-1.5 rounded-full bg-green-500 shadow-[0_0_5px_#22c55e]"></span> SYSTEM_ONLINE</span>
+<span>KERNEL_VERSION: 1.0.4-LTS</span>
+<span>ENCRYPTION: AES-256-GCM</span>
+</div>
+<div>
+                    © 2024 PHISHGUARD_RECON_MODULE // ALL_RIGHTS_RESERVED
+                </div>
+</footer>
+</div>
+</div>
+</body></html>

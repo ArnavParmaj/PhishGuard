@@ -9,6 +9,7 @@ backend/build/
 *.log
 
 # Environment files with actual secrets
+.env
 .env.local
 .env.production
 .env.*.local
